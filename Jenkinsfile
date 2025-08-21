@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "NodeJS"           // Must match NodeJS name in Jenkins Tools
-        sonarScanner "SonarScanner" // Must match SonarQube Scanner name in Tools
+        nodejs "NodeJS"   // Must match NodeJS tool name in Jenkins
     }
 
     stages {
@@ -21,7 +20,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQubeServer') { // Must match SonarQube Server name in Jenkins config
+                withSonarQubeEnv('SonarQubeServer') {  // Must match SonarQube Server name in Jenkins config
                     sh '''
                         sonar-scanner \
                           -Dsonar.projectKey=node-app \
