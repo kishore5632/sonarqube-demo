@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "NodeJS"   // Must match NodeJS tool name in Jenkins
+        nodejs "NodeJS"   // NodeJS tool name from Jenkins
     }
 
     stages {
@@ -20,14 +20,16 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQubeServer') {  // Must match SonarQube Server name in Jenkins config
-                    sh '''
-                        sonar-scanner \
-                          -Dsonar.projectKey=node-app \
-                          -Dsonar.sources=. \
-                          -Dsonar.host.url=http://localhost:9000 \
-                          -Dsonar.login=$SONAR_AUTH_TOKEN
-                    '''
+                withSonarQubeEnv('SonarQubeServer') {
+                    withEnv(["PATH+SONAR=${tool 'SonarScanner'}/bin"]) {  
+                        sh '''
+                            sonar-scanner \
+                              -Dsonar.projectKey=node-app \
+                              -Dsonar.sources=. \
+                              -Dsonar.host.url=http://localhost:9000 \
+                              -Dsonar.login=$SONAR_AUTH_TOKEN
+                        '''
+                    }
                 }
             }
         }
