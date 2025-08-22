@@ -2,5 +2,5 @@ sonar.projectKey=node-app
 sonar.projectName=Node App Security Scan
 sonar.projectVersion=1.0
 sonar.sources=.
-sonar.host.url=http:localhost:9000
-sonar.login=squ_9c139d192a22ef7d2847cf5baf77533daa6c9e7e
+sonar.host.url=http:http://3.86.89.140/:9000
+sonar.login=squ_9ad60b8b990fc85e154cf85b01dc91635ed766bf
